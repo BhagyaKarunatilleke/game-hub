@@ -3,7 +3,7 @@ import { Skeleton, SkeletonText } from '../ui/skeleton';
 
 const GameCardSkeleton = () => {
   return (
-    <Card.Root borderRadius='1rem' overflow='hidden' width='300px'>
+    <Card.Root>
       <Skeleton height='200px' />
       <Card.Body>
         <SkeletonText />
