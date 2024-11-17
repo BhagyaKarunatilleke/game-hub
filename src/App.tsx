@@ -1,4 +1,4 @@
-import { Box, Grid, GridItem, HStack } from '@chakra-ui/react';
+import { Box, Grid, GridItem, HStack, Show } from '@chakra-ui/react';
 import NavBar from './components/nav-bar/NavBar';
 import GameGrid from './components/game-grid/GameGrid';
 import GenreList from './components/aside/GenreList';
@@ -34,7 +34,7 @@ function App() {
           }
         />
       </GridItem>
-      <Box display={{ base: 'none', lg: 'block' }}>
+      <Show when={{ base: false, lg: true }}>
         <GridItem area={'aside'} paddingX={2}>
           <GenreList
             onSelectGenre={(genre) =>
@@ -43,7 +43,7 @@ function App() {
             selectedGenre={gameQuery.genre}
           />
         </GridItem>
-      </Box>
+      </Show>
       <GridItem area={'main'}>
         <Box paddingStart={4}>
           <GameHeading gameQuery={gameQuery} />

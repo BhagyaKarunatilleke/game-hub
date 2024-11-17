@@ -1,6 +1,6 @@
 import useGenres, { Genre } from '@/hooks/useGenres';
 import getCroppedImageUrl from '@/services/image-url';
-import { HStack, Image, List } from '@chakra-ui/react';
+import { Heading, HStack, Image, List } from '@chakra-ui/react';
 import { SkeletonText, Skeleton } from '../ui/skeleton';
 import { Button } from '../ui/button';
 
@@ -17,42 +17,52 @@ const GenreList = ({ onSelectGenre, selectedGenre }: Props) => {
 
   if (isLoading)
     return (
+      <>
+        <Heading fontSize='2xl'>Genres</Heading>
+        <List.Root>
+          {skeletons.map((skeleton) => (
+            <List.Item key={skeleton} listStyleType='none' paddingY={2}>
+              <HStack>
+                <Skeleton boxSize={8} />
+                <SkeletonText noOfLines={1} />
+              </HStack>
+            </List.Item>
+          ))}
+        </List.Root>
+      </>
+    );
+
+  return (
+    <>
+      <Heading fontSize='2xl'>Genres</Heading>
       <List.Root>
-        {skeletons.map((skeleton) => (
-          <List.Item key={skeleton} listStyleType='none' paddingY={2}>
+        {data.map((genre) => (
+          <List.Item key={genre.id} listStyleType='none' paddingY={3}>
             <HStack>
-              <Skeleton boxSize={8} />
-              <SkeletonText noOfLines={1} />
+              <Image
+                boxSize={8}
+                borderRadius={4}
+                src={getCroppedImageUrl(genre.image_background)}
+                objectFit='cover'
+              ></Image>
+              <Button
+                onClick={() => onSelectGenre(genre)}
+                width='min-content'
+                whiteSpace='normal'
+                textAlign='left'
+                fontSize={genre.id === selectedGenre?.id ? 'larger' : 'lg'}
+                fontWeight={
+                  genre.id === selectedGenre?.id ? 'extrabold' : 'normal'
+                }
+                variant='ghost'
+              >
+                {genre.name}
+              </Button>
             </HStack>
           </List.Item>
         ))}
       </List.Root>
-    );
-
-  return (
-    <List.Root>
-      {data.map((genre) => (
-        <List.Item key={genre.id} listStyleType='none' paddingY={2}>
-          <HStack>
-            <Image
-              boxSize={8}
-              borderRadius={4}
-              src={getCroppedImageUrl(genre.image_background)}
-            ></Image>
-            <Button
-              onClick={() => onSelectGenre(genre)}
-              fontSize={genre.id === selectedGenre?.id ? 'xl' : 'lg'}
-              fontWeight={
-                genre.id === selectedGenre?.id ? 'extrabold' : 'normal'
-              }
-              variant='ghost'
-            >
-              {genre.name}
-            </Button>
-          </HStack>
-        </List.Item>
-      ))}
-    </List.Root>
+    </>
   );
 };
 
