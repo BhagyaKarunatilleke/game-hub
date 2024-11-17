@@ -6,9 +6,10 @@ import { Button } from '../ui/button';
 
 interface Props {
   onSelectGenre: (genre: Genre) => void;
+  selectedGenre: Genre | null;
 }
 
-const GenreList = ({ onSelectGenre }: Props) => {
+const GenreList = ({ onSelectGenre, selectedGenre }: Props) => {
   const { data, isLoading, error } = useGenres();
   const skeletons = Array.from({ length: 10 }).map((_, index) => index);
 
@@ -40,7 +41,10 @@ const GenreList = ({ onSelectGenre }: Props) => {
             ></Image>
             <Button
               onClick={() => onSelectGenre(genre)}
-              fontSize='lg'
+              fontSize={genre.id === selectedGenre?.id ? 'xl' : 'lg'}
+              fontWeight={
+                genre.id === selectedGenre?.id ? 'extrabold' : 'normal'
+              }
               variant='ghost'
             >
               {genre.name}
