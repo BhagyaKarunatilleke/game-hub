@@ -1,7 +1,7 @@
 import useGenres, { Genre } from '@/hooks/useGenres';
 import getCroppedImageUrl from '@/services/image-url';
-import { HStack, Image, List, Skeleton, Text } from '@chakra-ui/react';
-import { SkeletonText } from '../ui/skeleton';
+import { HStack, Image, List } from '@chakra-ui/react';
+import { SkeletonText, Skeleton } from '../ui/skeleton';
 import { Button } from '../ui/button';
 
 interface Props {
