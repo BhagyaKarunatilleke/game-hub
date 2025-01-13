@@ -1,3 +1,4 @@
+import usePlatform from '@/hooks/usePlatform';
 import usePlatforms from '@/hooks/usePlatforms';
 import { HStack } from '@chakra-ui/react';
 import { BsChevronDown } from 'react-icons/bs';
@@ -14,16 +15,14 @@ const PlatformSelector = ({ onSelectPlatform, selectedPlatformId }: Props) => {
 
   if (error) return null;
 
-  const selectedPlatformName = data.results.find(
-    (platform) => platform.id == selectedPlatformId
-  )?.name;
+  const selectedPlatform = usePlatform(selectedPlatformId);
 
   return (
     <MenuRoot>
       <MenuTrigger asChild>
         <Button variant='subtle' size='sm' disabled={isLoading}>
           <HStack>
-            {selectedPlatformName || 'Platforms'}
+            {selectedPlatform?.name || 'Platforms'}
             <BsChevronDown />
           </HStack>
         </Button>
@@ -32,7 +31,7 @@ const PlatformSelector = ({ onSelectPlatform, selectedPlatformId }: Props) => {
         <MenuItem key='all' value='all' onClick={() => onSelectPlatform(null)}>
           All
         </MenuItem>
-        {data.results.map((platform) => (
+        {data?.results.map((platform) => (
           <MenuItem
             key={platform.id}
             value={platform.slug}
