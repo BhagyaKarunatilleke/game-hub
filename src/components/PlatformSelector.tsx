@@ -1,26 +1,29 @@
-import { HStack } from '@chakra-ui/react';
-import { MenuContent, MenuItem, MenuRoot, MenuTrigger } from './ui/menu';
-import { Button } from './ui/button';
-import { BsChevronDown } from 'react-icons/bs';
 import usePlatforms from '@/hooks/usePlatforms';
-import { Platform } from '@/services/platformService';
+import { HStack } from '@chakra-ui/react';
+import { BsChevronDown } from 'react-icons/bs';
+import { Button } from './ui/button';
+import { MenuContent, MenuItem, MenuRoot, MenuTrigger } from './ui/menu';
 
 interface Props {
-  onSelectPlatform: (platform: Platform | null) => void;
-  selectedPlatform: Platform | null;
+  onSelectPlatform: (platform: number | null) => void;
+  selectedPlatformId: number | null;
 }
 
-const PlatformSelector = ({ onSelectPlatform, selectedPlatform }: Props) => {
+const PlatformSelector = ({ onSelectPlatform, selectedPlatformId }: Props) => {
   const { data, error, isLoading } = usePlatforms();
 
   if (error) return null;
+
+  const selectedPlatformName = data.results.find(
+    (platform) => platform.id == selectedPlatformId
+  )?.name;
 
   return (
     <MenuRoot>
       <MenuTrigger asChild>
         <Button variant='subtle' size='sm' disabled={isLoading}>
           <HStack>
-            {selectedPlatform?.name ?? 'Platforms'}
+            {selectedPlatformName || 'Platforms'}
             <BsChevronDown />
           </HStack>
         </Button>
@@ -33,7 +36,7 @@ const PlatformSelector = ({ onSelectPlatform, selectedPlatform }: Props) => {
           <MenuItem
             key={platform.id}
             value={platform.slug}
-            onClick={() => onSelectPlatform(platform)}
+            onClick={() => onSelectPlatform(platform.id)}
           >
             {platform.name}
           </MenuItem>
