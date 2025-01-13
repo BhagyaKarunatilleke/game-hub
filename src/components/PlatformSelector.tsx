@@ -2,7 +2,8 @@ import { HStack } from '@chakra-ui/react';
 import { MenuContent, MenuItem, MenuRoot, MenuTrigger } from './ui/menu';
 import { Button } from './ui/button';
 import { BsChevronDown } from 'react-icons/bs';
-import usePlatforms, { Platform } from '@/hooks/usePlatforms';
+import usePlatforms from '@/hooks/usePlatforms';
+import { Platform } from '@/services/platformService';
 
 interface Props {
   onSelectPlatform: (platform: Platform | null) => void;
@@ -10,14 +11,14 @@ interface Props {
 }
 
 const PlatformSelector = ({ onSelectPlatform, selectedPlatform }: Props) => {
-  const { data, error } = usePlatforms();
+  const { data, error, isLoading } = usePlatforms();
 
   if (error) return null;
 
   return (
     <MenuRoot>
       <MenuTrigger asChild>
-        <Button variant='subtle' size='sm'>
+        <Button variant='subtle' size='sm' disabled={isLoading}>
           <HStack>
             {selectedPlatform?.name ?? 'Platforms'}
             <BsChevronDown />
