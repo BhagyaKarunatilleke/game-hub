@@ -37,7 +37,7 @@ const GenreList = ({ onSelectGenre, selectedGenre }: Props) => {
     <>
       <Heading fontSize='2xl'>Genres</Heading>
       <List.Root>
-        {data.map((genre) => (
+        {data.results.map((genre) => (
           <List.Item key={genre.id} listStyleType='none' paddingY={3}>
             <HStack>
               <Image

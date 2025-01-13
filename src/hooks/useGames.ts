@@ -1,8 +1,9 @@
+import { FetchDataResponse } from '@/services/api-client';
 import gamesService, { Game, GameQuery } from '@/services/gamesService';
 import { useQuery } from '@tanstack/react-query';
 
 const useGames = (gameQuery: GameQuery) =>
-  useQuery<Game[], Error>({
+  useQuery<FetchDataResponse<Game>, Error>({
     queryKey: ['games', gameQuery],
     queryFn: () =>
       gamesService.getAll({

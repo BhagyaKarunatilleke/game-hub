@@ -3,7 +3,7 @@ import axios, { AxiosRequestConfig } from 'axios';
 // VITE_ seems to be needed as a prefix when declaring custom environment variables in .env file.
 const apiKey = import.meta.env.VITE_RAWG_API_KEY;
 
-interface FetchDataResponse<T> {
+export interface FetchDataResponse<T> {
   count: number;
   results: T[];
 }
@@ -27,7 +27,7 @@ class APIClient<T> {
   getAll = (requestOptions?: AxiosRequestConfig) => {
     return axiosInstance
       .get<FetchDataResponse<T>>(this.endpoint, requestOptions)
-      .then((res) => res.data.results);
+      .then((res) => res.data);
   };
 }
 
