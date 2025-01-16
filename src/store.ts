@@ -1,6 +1,12 @@
-import { GameQuery } from '@/services/gamesService';
 import { mountStoreDevtool } from 'simple-zustand-devtools';
 import { create } from 'zustand';
+
+interface GameQuery {
+  genreId?: number;
+  platformId?: number | null;
+  sortOrder?: string;
+  searchText?: string;
+}
 
 interface GameQueryStore {
   gameQuery: GameQuery;
