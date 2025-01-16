@@ -1,5 +1,5 @@
 import gamesService from '@/services/gamesService';
-import { Game } from '@/entities/Game';
+import Game from '@/entities/Game';
 import { useQuery } from '@tanstack/react-query';
 import ms from 'ms';
 

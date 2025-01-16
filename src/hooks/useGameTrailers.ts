@@ -1,4 +1,4 @@
-import { GameTrailer } from '@/entities/GameTrailer';
+import GameTrailer from '@/entities/GameTrailer';
 import { APIClient, FetchDataResponse } from '@/services/api-client';
 import { useQuery } from '@tanstack/react-query';
 import ms from 'ms';
