@@ -13,7 +13,7 @@ import GenreList from '../components/aside/GenreList';
 import GameGrid from '../components/game-grid/GameGrid';
 
 const HomePage = () => {
-  const value = useBreakpointValue({ base: 'base', lg: 'lg' });
+  const breakpointValue = useBreakpointValue({ base: 'base', lg: 'lg' });
 
   return (
     <Grid
@@ -23,7 +23,7 @@ const HomePage = () => {
       }}
       templateColumns={{ base: '1fr', lg: '200px 1fr' }}
     >
-      <Show when={value !== 'base'}>
+      <Show when={breakpointValue !== 'base'}>
         <GridItem area={'aside'} paddingX={2}>
           <GenreList />
         </GridItem>
