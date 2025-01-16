@@ -7,8 +7,7 @@ import GameCardContainer from './GameCardContainer';
 import GameCardSkeleton from './GameCardSkeleton';
 
 const GameGrid = () => {
-  const { data, error, isLoading, hasNextPage, fetchNextPage } =
-    useGames();
+  const { data, error, isLoading, hasNextPage, fetchNextPage } = useGames();
   const skeletons = Array.from({ length: 9 }).map((_, index) => index);
 
   if (error) return <Text marginStart={4}>{error.message}</Text>;
